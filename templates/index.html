@@ -11,31 +11,66 @@
         <nav>
             <a href="/">Home</a>
             <a href="/upload">Upload</a>
-            <button id="toggleTheme">Toggle Theme</button>
+            <button onclick="toggleTheme()">Toggle Theme</button>
         </nav>
     </header>
 
     <main>
+        <div class="tabs">
+            <button onclick="filterVideos('All')">All</button>
+            <button onclick="filterVideos('Movies')">Movies</button>
+            <button onclick="filterVideos('Music')">Music</button>
+            <button onclick="filterVideos('Memes')">Memes</button>
+            <button onclick="filterVideos('Clips')">Clips</button>
+        </div>
+
         <h2>My Video Stream</h2>
-        <div class="video-list">
-            {% for filename in videos %}
-            <div class="video-item">
-                <video width="300" controls>
-                    <source src="{{ url_for('video', filename=filename) }}" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-                <p>{{ filename }}</p>
+        <div class="video-grid">
+            {% for video in videos %}
+            <div class="video-item" data-category="{{ video.category }}">
+                <img src="{{ url_for('static', filename=video.thumbnail) }}" alt="Thumbnail" class="thumb">
+                <div class="video-container">
+                    <div class="loader"></div>
+                    <video controls>
+                        <source src="{{ url_for('video', filename=video.name) }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <p>{{ video.name }}</p>
             </div>
             {% endfor %}
         </div>
     </main>
 
     <script>
-        const toggleBtn = document.getElementById('toggleTheme');
-        toggleBtn.onclick = () => {
-            document.body.classList.toggle('dark');
-            document.body.classList.toggle('light');
-        };
+        function toggleTheme() {
+            const body = document.body;
+            body.classList.toggle("dark");
+            body.classList.toggle("light");
+        }
+
+        function filterVideos(category) {
+            const items = document.querySelectorAll('.video-item');
+            items.forEach(item => {
+                const itemCat = item.getAttribute('data-category');
+                if (category === 'All' || itemCat === category) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // Video loading animation
+        document.addEventListener("DOMContentLoaded", () => {
+            const containers = document.querySelectorAll('.video-container');
+            containers.forEach(container => {
+                const video = container.querySelector('video');
+                video.addEventListener('loadeddata', () => {
+                    container.classList.add('loaded');
+                });
+            });
+        });
     </script>
 </body>
 </html>
