@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}My Video Site{% endblock %}</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+        }
+
+        :root {
+            --bg: #ffffff;
+            --text: #000000;
+        }
+
+        [data-theme="dark"] {
+            --bg: #121212;
+            --text: #ffffff;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #333;
+            color: white;
+            padding: 10px 20px;
+        }
+
+        header .left, header .right {
+            display: flex;
+            align-items: center;
+        }
+
+        header a {
+            color: white;
+            margin-left: 15px;
+            text-decoration: none;
+        }
+
+        .toggle-btn {
+            margin-left: 15px;
+            padding: 5px 10px;
+            cursor: pointer;
+            background: #555;
+            border: none;
+            color: white;
+            border-radius: 5px;
+        }
+
+        main {
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="left">
+            <form action="{{ url_for('search') }}" method="get">
+                <input type="text" name="query" placeholder="Search videos..." required>
+                <button type="submit">Search</button>
+            </form>
+        </div>
+        <div class="right">
+            <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('upload') }}">Upload</a>
+            <button class="toggle-btn" onclick="toggleTheme()">Toggle Theme</button>
+        </div>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const current = html.getAttribute('data-theme');
+            html.setAttribute('data-theme', current === 'light' ? 'dark' : 'light');
+        }
+    </script>
+</body>
+</html>

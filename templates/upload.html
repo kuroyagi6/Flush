@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Upload Video</h2>
+    <form method="POST" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label for="video" class="form-label">Select Video:</label>
+            <input type="file" name="video" id="video" class="form-control" accept="video/*" required>
+        </div>
+        <div class="mb-3">
+            <label for="thumbnail" class="form-label">Select Thumbnail (optional):</label>
+            <input type="file" name="thumbnail" id="thumbnail" class="form-control" accept="image/*">
+        </div>
+        <button type="submit" class="btn btn-primary">Upload</button>
+    </form>
+</div>
+{% endblock %}
