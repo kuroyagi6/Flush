@@ -1,0 +1,55 @@
+:root[data-theme='light'] {
+    --bg: white;
+    --text: black;
+    --card-bg: #f0f0f0;
+}
+
+:root[data-theme='dark'] {
+    --bg: #121212;
+    --text: white;
+    --card-bg: #1e1e1e;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+}
+
+header {
+    padding: 10px;
+    background-color: var(--card-bg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.container {
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.video-card {
+    background-color: var(--card-bg);
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.thumbnail {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.title {
+    margin-top: 5px;
+    font-weight: bold;
+}
+
+.toggle-btn {
+    padding: 5px 10px;
+    cursor: pointer;
+}

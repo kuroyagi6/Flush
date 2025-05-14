@@ -1,90 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>My Video Stream</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            background-color: #121212;
-            color: #fff;
-        }
-        header {
-            background-color: #1e1e1e;
-            padding: 10px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .header-title {
-            font-size: 24px;
-            font-weight: bold;
-        }
-        .search-form {
-            flex: 1;
-        }
-        .search-input {
-            padding: 5px;
-            width: 70%;
-            font-size: 16px;
-        }
-        .upload-link, .toggle-btn {
-            margin-left: 15px;
-            text-decoration: none;
-            color: white;
-        }
-        .toggle-btn {
-            padding: 5px 10px;
-        }
-        .container {
-            display: flex;
-            flex-wrap: wrap;
-            padding: 20px;
-        }
-        .video-card {
-            width: 200px;
-            margin: 10px;
-            text-align: center;
-        }
-        .thumbnail {
-            width: 100%;
-            height: auto;
-            border-radius: 10px;
-        }
-        .title {
-            margin-top: 5px;
-            font-weight: bold;
-        }
-    </style>
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
     <header>
         <form class="search-form" method="GET" action="{{ url_for('search') }}">
-            <input class="search-input" type="text" name="q" placeholder="Search...">
+            <input class="search-input" type="text" name="q" placeholder="Search videos...">
         </form>
         <div class="header-title">My Video Stream</div>
         <a class="upload-link" href="{{ url_for('upload') }}">Upload</a>
-        <button class="toggle-btn" onclick="toggleTheme()">Toggle</button>
+        <button class="toggle-btn" onclick="toggleTheme()">Toggle Theme</button>
     </header>
 
-    <div class="container">
+    <div class="video-grid">
         {% for video in videos %}
         <div class="video-card">
             <a href="{{ url_for('video', filename=video.name) }}">
-                <img class="thumbnail" src="{{ url_for('static', filename=video.thumbnail) }}" alt="Thumbnail">
+                <img class="thumbnail" src="{{ url_for('static', filename=video.thumbnail) }}" alt="{{ video.name }}">
                 <div class="title">{{ video.name }}</div>
             </a>
         </div>
         {% endfor %}
     </div>
-
-    <script>
-        function toggleTheme() {
-            const html = document.documentElement;
-            const currentTheme = html.getAttribute('data-theme');
-            html.setAttribute('data-theme', currentTheme === 'dark' ? 'light' : 'dark');
-        }
-    </script>
-</body>
-</html>
+</div>
+{% endblock %}

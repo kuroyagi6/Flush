@@ -4,21 +4,23 @@
     <meta charset="UTF-8">
     <title>{% block title %}My Video Site{% endblock %}</title>
     <style>
+        :root[data-theme="light"] {
+            --bg: #ffffff;
+            --text: #000000;
+            --card-bg: #f0f0f0;
+        }
+
+        :root[data-theme="dark"] {
+            --bg: #121212;
+            --text: #ffffff;
+            --card-bg: #1e1e1e;
+        }
+
         body {
             margin: 0;
             font-family: Arial, sans-serif;
             background-color: var(--bg);
             color: var(--text);
-        }
-
-        :root {
-            --bg: #ffffff;
-            --text: #000000;
-        }
-
-        [data-theme="dark"] {
-            --bg: #121212;
-            --text: #ffffff;
         }
 
         header {
@@ -41,18 +43,48 @@
             text-decoration: none;
         }
 
+        input[type="text"] {
+            padding: 5px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        button[type="submit"],
         .toggle-btn {
-            margin-left: 15px;
+            margin-left: 10px;
             padding: 5px 10px;
             cursor: pointer;
             background: #555;
             border: none;
             color: white;
-            border-radius: 5px;
+            border-radius: 4px;
         }
 
         main {
             padding: 20px;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .video-card {
+            background-color: var(--card-bg);
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .thumbnail {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        .title {
+            margin-top: 5px;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -78,7 +110,7 @@
     <script>
         function toggleTheme() {
             const html = document.documentElement;
-            const current = html.getAttribute('data-theme');
+            const current = html.getAttribute('data-theme') || 'light';
             html.setAttribute('data-theme', current === 'light' ? 'dark' : 'light');
         }
     </script>
