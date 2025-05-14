@@ -90,5 +90,7 @@ def search():
                 results.append({'name': filename, 'thumbnail': thumbnail})
     return render_template('index.html', videos=results)
 
+from waitress import serve
+
 if __name__ == '__main__':
-    app.run(debug=False, port=8001)
+    serve(app, host='0.0.0.0', port=10000)
