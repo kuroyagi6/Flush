@@ -1,143 +1,119 @@
-/* === General Body Styling === */
+/* General styles */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f5f5f5;
     margin: 0;
     padding: 0;
-    transition: background 0.3s, color 0.3s;
+    color: #333;
+    transition: background-color 0.3s, color 0.3s;
 }
 
-/* === Light and Dark Themes === */
-body.light {
-    background: #f8f9fa;
-    color: #222;
-}
-
-body.dark {
-    background: #121212;
+.dark-mode {
+    background-color: #1e1e1e;
     color: #f5f5f5;
 }
 
-/* === Header Styling === */
-header {
-    background: #333;
+a {
+    text-decoration: none;
+    color: #6200ee;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Navbar */
+.navbar {
+    background: #6200ee;
     color: white;
-    padding: 1em;
+    padding: 1rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
 }
 
-header h1 {
-    margin: 0;
+.navbar .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
 }
 
-nav a, nav button {
+.navbar nav a,
+.navbar button {
     color: white;
-    margin: 0.5em;
-    text-decoration: none;
-    background: #555;
+    margin-left: 1rem;
+    background: none;
     border: none;
-    padding: 0.5em 1em;
-    border-radius: 4px;
     cursor: pointer;
+    font-size: 1rem;
 }
 
-nav button:hover, nav a:hover {
-    background: #777;
+/* Upload page */
+.upload-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh;
+    padding: 20px;
 }
 
-/* === Main Content Area === */
-main {
-    padding: 1em;
+.upload-card {
+    background: white;
+    border-radius: 10px;
+    padding: 2rem;
+    max-width: 400px;
+    width: 100%;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
 }
 
-/* === Category Tabs === */
-.tabs {
-    text-align: center;
-    margin-bottom: 1em;
-}
-
-.tabs button {
-    margin: 5px;
-    padding: 0.6em 1.2em;
-    border: none;
-    background: #444;
-    color: white;
-    border-radius: 20px;
-    cursor: pointer;
-    font-size: 0.95em;
-}
-
-.tabs button:hover {
-    background: #666;
-}
-
-body.dark .tabs button {
-    background: #888;
-}
-
-body.dark .tabs button:hover {
-    background: #aaa;
-}
-
-/* === Video Grid === */
-.video-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 1em;
-}
-
-/* === Video Item === */
-.video-item {
-    background: #f4f4f4;
-    padding: 1em;
-    border-radius: 8px;
-    text-align: center;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    position: relative;
-}
-
-body.dark .video-item {
+.dark-mode .upload-card {
     background: #2c2c2c;
-    box-shadow: 0 2px 6px rgba(255,255,255,0.05);
 }
 
-/* === Thumbnail Styling === */
-.thumb {
-    width: 100%;
-    max-height: 180px;
-    object-fit: cover;
-    border-radius: 6px;
-    margin-bottom: 0.5em;
+.upload-card h2 {
+    margin-bottom: 1.5rem;
 }
 
-/* === Video Styling === */
-video {
-    width: 100%;
-    border-radius: 6px;
+.upload-card label {
     display: block;
+    margin-top: 1rem;
+    font-weight: 500;
 }
 
-/* === Video Name Text === */
-.video-item p {
-    font-size: 0.9em;
-    margin-top: 0.5em;
-    word-break: break-word;
+.upload-card input[type="file"] {
+    width: 100%;
+    padding: 0.5rem;
+    margin-top: 0.3rem;
+    background: #f0f0f0;
+    border-radius: 4px;
+    border: 1px solid #ccc;
 }
 
-/* === Loading Spinner === */
+.upload-btn {
+    margin-top: 1.5rem;
+    width: 100%;
+    padding: 0.75rem;
+    background: #6200ee;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.upload-btn:hover {
+    background: #4b00c2;
+}
+
+/* Loading animation */
 .loader {
-    border: 5px solid #f3f3f3;
-    border-top: 5px solid #3498db;
+    border: 6px solid #f3f3f3;
+    border-top: 6px solid #6200ee;
     border-radius: 50%;
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     animation: spin 1s linear infinite;
-    position: absolute;
-    top: 45%;
-    left: 45%;
-    z-index: 10;
+    margin: 0 auto;
 }
 
 @keyframes spin {
@@ -145,19 +121,45 @@ video {
     100% { transform: rotate(360deg); }
 }
 
-/* === Video Container with Loader === */
-.video-container {
-    position: relative;
+/* Video stream grid */
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    padding: 1rem;
 }
 
-.video-container video {
-    display: none;
+.video-card {
+    background: white;
+    border-radius: 10px;
+    padding: 1rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    text-align: center;
 }
 
-.video-container.loaded video {
-    display: block;
+.dark-mode .video-card {
+    background: #2c2c2c;
 }
 
-.video-container.loaded .loader {
-    display: none;
+.video-card img {
+    max-width: 100%;
+    border-radius: 8px;
+}
+
+.video-card p {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    word-break: break-word;
+}
+
+/* Responsive layout tweaks */
+@media (max-width: 600px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .navbar nav {
+        margin-top: 0.5rem;
+    }
 }
