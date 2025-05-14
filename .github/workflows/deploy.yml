@@ -1,0 +1,21 @@
+name: Deploy to Render
+
+on:
+  push:
+    branches:
+      - main  # Trigger deployment when pushing to the main branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Deploy to Render
+        run: |
+          curl -sSL https://get.pnpm.io | sh -  # Install pnpm (if you're using it)
+          pnpm install  # Install dependencies
+          pnpm build  # Build your app
+          pnpm deploy  # Deploy command, based on your setup (could be a script or Render's API)
