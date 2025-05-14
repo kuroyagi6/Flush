@@ -1,18 +1,42 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload | FlushZone</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='static.css') }}">
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <h1 class="logo">FlushZone</h1>
+            <nav>
+                <a href="{{ url_for('index') }}">Home</a>
+                <a href="{{ url_for('upload') }}">Upload</a>
+                <button id="theme-toggle">Toggle Theme</button>
+            </nav>
+        </div>
+    </header>
 
-{% block content %}
-<div class="container mt-5">
-    <h2 class="mb-4">Upload Video</h2>
-    <form method="POST" enctype="multipart/form-data">
-        <div class="mb-3">
-            <label for="video" class="form-label">Select Video:</label>
-            <input type="file" name="video" id="video" class="form-control" accept="video/*" required>
+    <main class="upload-container">
+        <div class="upload-card">
+            <h2>Upload Video</h2>
+            <form action="{{ url_for('upload') }}" method="post" enctype="multipart/form-data">
+                <label for="video">Select Video:</label>
+                <input type="file" name="video" id="video" required>
+
+                <label for="thumbnail">Select Thumbnail (optional):</label>
+                <input type="file" name="thumbnail" id="thumbnail">
+
+                <button type="submit" class="upload-btn">Upload</button>
+            </form>
         </div>
-        <div class="mb-3">
-            <label for="thumbnail" class="form-label">Select Thumbnail (optional):</label>
-            <input type="file" name="thumbnail" id="thumbnail" class="form-control" accept="image/*">
-        </div>
-        <button type="submit" class="btn btn-primary">Upload</button>
-    </form>
-</div>
-{% endblock %}
+    </main>
+
+    <script>
+        // Toggle theme switcher
+        document.getElementById('theme-toggle').onclick = function () {
+            document.body.classList.toggle('dark-mode');
+        };
+    </script>
+</body>
+</html>
